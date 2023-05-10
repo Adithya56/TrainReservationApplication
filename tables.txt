@@ -1,0 +1,5 @@
+create table stations (stn_code char(4), stn_name varchar(100),constraint pk_stn primary key(stn_code))
+
+create table stationDist(fst_code char(4),tst_code char(4),std_dist int,constraint fk_fst foreign key(fst_code) references stations(stn_code),constraint fk_tst foreign key(tst_code) references stations(stn_code))
+
+create table trains(trn_no int, trn_name varchar(100),trn_type char(4),trn_start char(4),trn_end char(4), trn_surcharge numeric,trn_status char(2),constraint fk_st foreign key(trn_start) references stations(stn_code),constraint fk_end foreign key(trn_end) references stations(stn_code),constraint pk_trn primary key(trn_no))
