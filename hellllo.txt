@@ -1,0 +1,191 @@
+1.
+select round(avg((scost+dcost)*sold),2) from adi_sd where dev_in='PASCAL'
+2.
+select name,extract('year' from age(current_date,dob)) from adi_prog
+3.
+select ab.name,extract('year' from age(current_date,ab.dob)) from adi_prog as ab,adi_cs as bc where ab.progid=bc.progid and course='DCS';
+4.
+select max(sold) from adi_sd
+5.
+select name,dob from adi_prog where extract(month from dob)=1;
+6.
+select min(ccost) from adi_cs
+7.
+select count(course) from adi_cs where course='PGDCA'
+8.
+select sum(scost*sold) as tot_revenue from adi_sd where dev_in='C';
+9.
+select ab.* from adi_sd ab,adi_prog cd where ab.progid=cd.progid and name='RAMESH';
+10.
+select count(ab.name) from adi_prog ab,adi_cs cd where ab.progid=cd.progid and cd.splace='NKIITS';
+11.
+select title from adi_sd where scost*sold>20000
+12.
+select round(dcost/scost) from adi_sd
+13.
+select max(dcost) from adi_sd where dev_in='BASIC'
+14.
+select * from adi_sd where scost*sold>dcost
+15.
+select count(dev_in) from adi_sd where dev_in='BASIC';
+16.
+select count(ab.name) from adi_prog ab,adi_cs cd where ab.progid=cd.progid and cd.splace='NKXGEN';
+17.
+select count(progid) from adi_cs where ccost>=5000 and ccost<=10000;
+18.
+select round(avg(ccost)) from adi_cs
+19.
+select name from adi_prog where prof1='C' or prof2='C'
+20.
+select count(name) from adi_prog where prof1='COBOL' or prof1='PASCAL' or prof2='PASCAL' or prof2='COBOL'
+21.
+select count(name) from adi_prog where prof1!='C' or prof1!='PASCAL' and prof2!='PASCAL' or prof2!='C'
+22.
+select max(age(current_date,dob)) from adi_prog where gender='M'
+23.
+select avg(age(current_date,dob)) from adi_prog where gender='F'
+24.
+select name,extract('year' from age(current_date,dob)) as age from adi_prog order by age desc
+25.
+select name from adi_prog where extract(month from dob)=extract(month from current_date)
+26.
+select count(gender) from adi_prog where gender='F'
+27.
+select prof1 from adi_prog where gender='M' union select prof2 from adi_prog where gender='M'
+28.
+select round(avg(salary)) from adi_prog
+29.
+select name from adi_prog where salary>=2000 and salary<=4000
+30.
+select progid,name from adi_prog where prof1 not in('CLIPPER','COBOL','PASCAL') and prof2 not in('CLIPPER','COBOL','PASCAL');
+31.
+select progid from adi_prog where ((prof1='C' or prof2='C') and (gender='F'))
+32.
+select progid from adi_prog where (extract('month' from dob)*30+extract('day' from dob)-
+                                   (extract(month from dob)*30+extract(day from dob))<=7  and (extract(month from current_date)>=extract(month from dob))
+33.
+select progid from adi_prog where (extract(year from current_date)-extract(year from doj))<1
+34.
+select name from adi_prog where extract(year from age(curren_date,doj))>1 and
+35.
+select title,dcost-scost*sold from adi_sd where dcost>scost*sold
+36.
+select title from adi_sd where sold=0
+37.
+select scost from adi_sd ad,adi_prog pg where ad.progid=pg.progid and pg.name='MARY' 
+38.
+select distinct splace from adi_cs 
+39.
+select distinct course from adi_cs
+40.
+select name from adi_prog where name like '%E%E%'
+41.
+select name from adi_prog where Length(name)=5
+42.
+select name from adi_prog where (prof1='COBOL' or prof2='COBOL') and extract(year from age(current_date,doj))>2 and gender='F'
+43.
+select min(length(name)) from adi_prog
+44.
+select round(avg(dcost)) from adi_sd where dev_in='COBOL'
+45.
+
+46.
+select name from adi_prog where extract(day from dob)=30
+47.
+select name,salary from adi_prog where gender='M' and prof1!='COBOL' and prof2!='COBOL'
+48.
+select title,scost,dcost,scost-dcost as diff from adi_sd order by scost-dcost desc
+49.
+select name,dob,doj from adi_prog where extract(month from dob)=extract(month from doj)
+50.
+select title from adi_sd where (length(title)-length(replace(title,' ','')))>=1
+
+Query2:
+1.
+select dev_in,count(title) from adi_sd group by(dev_in)
+2.
+select progid,count(title) from adi_sd group by progid order by progid
+3.
+select gender,count(progid) from adi_prog group by gender
+4.
+select ab.dev_in,max(ab.scost),max(ab.sold) from adi_sd ab,adi_sd cd where ab.dev_in=cd.dev_in group by(ab.dev_in) 
+5.
+select extract(year from dob),count(name) from adi_prog group by(extract(year from dob))
+6.
+select extract(year from doj),count(name) from adi_prog group by(extract(year from doj))
+7.
+select extract(month from dob),count(name) from adi_prog group by(extract(month from dob))
+8.
+select extract(month from doj),count(name) from adi_prog group by(extract(month from doj))
+9.
+select prof1,count(progid) from adi_prog group by prof1
+10.
+select prof2,count(progid) from adi_prog group by prof2
+11.
+select salary,count(progid) from adi_prog group by(salary)
+12.
+select splace,count(progid) from adi_cs group by splace
+13.
+select course,count(progid) from adi_cs group by course
+14.
+select dev_in,sum(dcost) from adi_sd group by dev_in
+15.
+select distinct ab.dev_in,ab.title,ab.scost from adi_sd ab,adi_sd cd where ab.dev_in=cd.dev_in
+16.
+select distinct ab.progid,ab.title,ab.scost from adi_sd ab,adi_sd cd where ab.progid=cd.progid order by progid
+17.
+select distinct ab.progid,ab.title,ab.sold from adi_sd ab,adi_sd cd where ab.progid=cd.progid order by progid
+18.
+select progid,count(title) from adi_sd group by progid order by progid
+19.
+select distinct ab.dev_in,ab.progid,ab.title,ab.scost from adi_sd ab,adi_sd cd where ab.dev_in=cd.dev_in order by dev_in
+20.
+select pg.name,max(scost),min(scost) from adi_sd ab,adi_prog pg where ab.progid=pg.progid group by(pg.name)
+21.
+select name,max(scost),avg(dcost)
+22.
+select splace,count(course),round(avg(ccost)) from adi_cs group by splace
+23.
+select splace,count(progid) from adi_cs group by(splace)
+24.
+select name,gender from adi_prog group by gender,name
+25.
+select  ab.name,cd.title from adi_prog ab,adi_sd cd where ab.progid=cd.progid
+26.
+select dev_in,count(title) from adi_sd group by dev_in
+27.
+select dev_in,title,count(title) from adi_sd where dcost<1000 group by dev_in,title
+28.
+select dev_in,round(avg(dcost-scost)) from adi_sd group by dev_in
+29.
+select progid,scost,dcost,(dcost-scost*sold) from adi_sd where dcost<scost*sold
+30.
+select max(salary),min(salary),round(avg(salary)) from adi_prog where salary>2000 group by progid
+
+Query3:
+select * from adi_prog
+select * from adi_cs
+select * from adi_sd order by dev_in
+1.
+select progid,salary from adi_prog where (prof1='C' or prof2='C') and salary=(select max(salary) from adi_prog where prof1='C' or prof2='C')
+2.
+select progid,name,salary from adi_prog where (prof1='COBOL' or prof2='COBOL') and gender='F' and salary=(select max(salary) from adi_prog where (prof1='COBOL' or prof2='COBOL') and gender='F' )
+3.
+select prof1,name from adi_prog where (prof1,salary) in(select prof1, max(salary) from adi_prog group by prof1)
+4.
+select progid,name from adi_prog where age(current_date,doj)=(select min(age(current_date,doj)) from adi_prog )
+5.
+select progid,name from adi_prog where age(current_date,doj)=(select max(age(current_date,doj)) from adi_prog )
+6.
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+select extract(Month from to_timestamp('1966-04-08','YYYY-MM-DD')) from adi_prog
+select * from adi_sd
+select * from adi_prog
+select * from adi_cs
